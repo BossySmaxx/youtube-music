@@ -1,0 +1,19 @@
+body {
+
+}
+
+#layout #player-bar-background {
+    background-color: transparent;
+}
+
+#layout ytmusic-player-bar.ytmusic-app {
+    background: rgba(17, 17, 17, 0.233);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+}
+
+tp-yt-paper-listbox.ytmusic-menu-popup-renderer{
+    background: rgba(17, 17, 17, 0.233);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px) hue-rotate(35deg);
+}
