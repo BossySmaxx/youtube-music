@@ -3,8 +3,11 @@ const path = require("path");
 const { createWindow } = require("./window");
 const url = require("url");
 const { cssInjector } = require("./utilities/css.injector");
+const { jsInjector } = require("./utilities/jsInjector");
+
 const fs = require("fs");
 const trayMenu = require("./tray-menu");
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 
 let window;
 app.on("ready", () => {
@@ -15,13 +18,17 @@ app.on("ready", () => {
     window.on("enter-full-screen", () => {
         window.setAutoHideMenuBar(true);
     });
+
     window.on("leave-full-screen", () => {
         window.setAutoHideMenuBar(false);
-    })
+    });
 
     tray.setContextMenu(trayMenu(window, app));
-    // tray.popUpContextMenu();
-    window.webContents.on("did-finish-load", () => cssInjector(window.webContents, path.join(__dirname, "./override.css")));
+    window.webContents.on("did-finish-load", () => {
+        cssInjector(window.webContents, path.join(__dirname, "./override.css"));
+        jsInjector(window.webContents, path.join(__dirname, "./web-scripts/script.js"));
+    });
+
 });
 
 app.on("window-all-closed", (e) => {
