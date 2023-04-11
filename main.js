@@ -3,7 +3,9 @@ const path = require("path");
 const { createWindow } = require("./window");
 const url = require("url");
 const { cssInjector } = require("./utilities/css.injector");
-const { jsInjector } = require("./utilities/jsInjector");
+const { jsInjector } = require("./utilities/jsInjector"); 
+
+// Just some commented text 
 
 const fs = require("fs");
 const trayMenu = require("./tray-menu");
