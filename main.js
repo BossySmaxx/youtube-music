@@ -27,6 +27,7 @@ app.on("ready", () => {
     window.webContents.on("did-finish-load", () => {
         cssInjector(window.webContents, path.join(__dirname, "./override.css"));
         jsInjector(window.webContents, path.join(__dirname, "./web-scripts/script.js"));
+        jsInjector(window.webContents, path.join(__dirname, "./web-scripts/offline-music.js"));
     });
 
 });
