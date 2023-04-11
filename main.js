@@ -5,8 +5,6 @@ const url = require("url");
 const { cssInjector } = require("./utilities/css.injector");
 const { jsInjector } = require("./utilities/jsInjector"); 
 
-// Just some commented text 
-
 const fs = require("fs");
 const trayMenu = require("./tray-menu");
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
@@ -28,6 +26,7 @@ app.on("ready", () => {
     tray.setContextMenu(trayMenu(window, app));
     window.webContents.on("did-finish-load", () => {
         cssInjector(window.webContents, path.join(__dirname, "./override.css"));
+        cssInjector(window.webContents, path.join(__dirname, "./web-scripts/offline-music.css"));
         jsInjector(window.webContents, path.join(__dirname, "./web-scripts/script.js"));
         jsInjector(window.webContents, path.join(__dirname, "./web-scripts/offline-music.js"));
     });
