@@ -1,30 +1,31 @@
 let foundContextMenu = false;
 
-const contextMenuObserver = new MutationObserver((e) => {
-    const contextMenuContainer =  document.querySelector("ytmusic-menu-popup-renderer tp-yt-paper-listbox");
-    const downloadBtn = appendMenuItem("Download", contextMenuContainer, "kisu", "pisu")
-    
-    if (contextMenuContainer.contains(downloadBtn)) return;
-    // contextMenuContainer.prepend("<h1 class='style-scope'> Download Now </h1>");
-    if (!contextMenuContainer.contains(downloadBtn)) {
-        setTimeout(() => {
-            console.log("element injecting...");
-            const contextMenuContainer =  document.querySelector("ytmusic-menu-popup-renderer tp-yt-paper-listbox");
-            contextMenuContainer.prepend(appendMenuItem("Download", contextMenuContainer, "kisu", "pisu"));   
-        }, 0);
-        foundContextMenu = true;
-        return;
-    }
-
-});
-
 const popUpContainer = document.querySelector("ytmusic-popup-container");
-contextMenuObserver.observe(popUpContainer, {
-    // subtree: true, 
-    childList: true
+
+console.log(popUpContainer.tagName === "ytmusic-popup-container".toUpperCase());
+
+const contextMenuObserver = new MutationObserver(function (mutations) {
+	console.log("mutating...")
+	const contextMenuWrapper = document.querySelector("ytmusic-menu-popup-renderer tp-yt-paper-listbox");
+	for (let i = 0; i < mutations.length; i++) {
+		if (mutations[i].addedNodes[0]) {
+			if (mutations[i].addedNodes[0].tagName === "YTMUSIC-MENU-NAVIGATION-ITEM-RENDERER") {
+				contextMenuWrapper.prepend(createMenuItem())
+				console.log(mutations[i].addedNodes[0].tagName === "YTMUSIC-MENU-NAVIGATION-ITEM-RENDERER");
+				// contextMenuObserver.disconnect();
+				break;
+			}
+		}
+		
+	}
 });
 
-function appendMenuItem(menuItemName, menu, clickHandler, icon) {
+contextMenuObserver.observe(popUpContainer, {
+	childList: true, 
+	subtree: true
+})
+
+function createMenuItem() {
     const itemEle = document.createElement("template");
     let html = `<div
 	class="style-scope menu-item ytmusic-menu-popup-renderer"
