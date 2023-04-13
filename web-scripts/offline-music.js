@@ -5,13 +5,13 @@ const popUpContainer = document.querySelector("ytmusic-popup-container");
 console.log(popUpContainer.tagName === "ytmusic-popup-container".toUpperCase());
 
 const contextMenuObserver = new MutationObserver(function (mutations) {
-	console.log("mutating...")
+	// console.log("mutating...")
 	const contextMenuWrapper = document.querySelector("ytmusic-menu-popup-renderer tp-yt-paper-listbox");
 	for (let i = 0; i < mutations.length; i++) {
 		if (mutations[i].addedNodes[0]) {
 			if (mutations[i].addedNodes[0].tagName === "YTMUSIC-MENU-NAVIGATION-ITEM-RENDERER") {
 				contextMenuWrapper.prepend(createMenuItem())
-				console.log(mutations[i].addedNodes[0].tagName === "YTMUSIC-MENU-NAVIGATION-ITEM-RENDERER");
+				// console.log(mutations[i].addedNodes[0].tagName === "YTMUSIC-MENU-NAVIGATION-ITEM-RENDERER");
 				// contextMenuObserver.disconnect();
 				break;
 			}
