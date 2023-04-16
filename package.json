@@ -1,21 +1,32 @@
 {
-  "name": "experiments",
-  "version": "1.0.0",
-  "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "electron ./"
+    "start": "electron ./",
+    "build": "electron-builder"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "electron": "^24.0.0",
-    "express": "^4.18.2"
-  },
+  "description": "this app will let you listen to music ",
+  "author": "bossysmaxx",
+  "name": "youthoob-muzik",
+  "version": "1.0.0",
   "dependencies": {
     "@cliqz/adblocker-electron": "^1.26.5",
     "cross-fetch": "^3.1.5",
     "node-fetch": "^2.6.9"
+  },
+  "devDependencies": {
+    "electron": "^24.0.0",
+    "electron-builder": "^23.6.0"
+  },
+  "build": {
+    "appId": "com.youthoob-muzik.app",
+    "directories": {
+      "output": "build"
+    },
+    "productName": "Youthoob Muzik",
+    "target": "NSIS",
+    "nsis": {
+      "allowToChangeInstallationDirectory": true,
+      "oneClick": false
+    }
   }
 }

@@ -7,7 +7,6 @@ const { jsInjector } = require("./utilities/jsInjector");
 const { loadPlugins } = require("./utilities/loadPlugins");
 const fs = require("fs");
 
-
 const trayMenu = require("./tray-menu");
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 
@@ -33,10 +32,7 @@ app.on("ready", () => {
         jsInjector(window.webContents, path.join(__dirname, "./web-scripts/offline-music.js"));
     });
 
-    window.webContents.on("did-finish-load", (e) => {
-        loadPlugins(["adblocker"], window);
-    })
-    
+    loadPlugins(["adblocker"], window.webContents.session);
 
 });
 
